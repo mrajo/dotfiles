@@ -1,0 +1,8 @@
+[alias]
+	st = status -s
+[user]
+	name = Anthony Castle
+	email = acastle@casas.org
+[core]
+	autocrlf = true
+	fileMode = false
