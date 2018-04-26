@@ -1,0 +1,52 @@
+#!/bin/bash
+
+# basic installs
+sudo apt update && sudo apt upgrade -y
+sudo apt install build-essential -y
+
+# install git
+sudo add-apt-repository ppa:git-core/ppa
+sudo apt update
+sudo apt install git -y
+
+# install keybase
+curl -O https://prerelease.keybase.io/keybase_amd64.deb
+## if you see an error about missing `libappindicator1`
+## from the next command, you can ignore it, as the
+## subsequent command corrects it
+sudo dpkg -i keybase_amd64.deb
+sudo apt-get install -f
+run_keybase
+rm keybase_amd64.deb
+
+# create folders
+mkdir -p ~/.local/bin
+mkdir ~/src
+
+# ruby-install
+cd ~/src
+wget -O ruby-install-0.6.1.tar.gz https://github.com/postmodern/ruby-install/archive/v0.6.1.tar.gz
+tar xzvf ruby-install-0.6.1.tar.gz
+cd ruby-install-0.6.1/
+sudo make install
+
+# chruby
+cd ~/src
+wget -O chruby-0.3.9.tar.gz https://github.com/postmodern/chruby/archive/v0.3.9.tar.gz
+tar xzvf chruby-0.3.9.tar.gz
+cd chruby-0.3.9/
+sudo make install
+
+# node
+git clone https://github.com/creationix/nvm.git ~/.nvm
+cd ~/.nvm
+git checkout v0.33.11
+. nvm.sh
+
+# keychain
+cd ~/src
+wget -O keychain-2.8.5.tar.gz https://github.com/funtoo/keychain/archive/2.8.5.tar.gz
+tar xzvf keychain-2.8.5.tar.gz
+cd keychain-2.8.5/
+make clean && make
+cp keychain ~/.local/bin/
