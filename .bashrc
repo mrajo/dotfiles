@@ -58,7 +58,8 @@ fi
 ### ac
 
 . ~/.bash/git-prompt.sh
-export PROMPT_COMMAND='__git_ps1 "\n\[\e[0m\][\[\e[0;32m\]\u@\H\[\e[0m]\]\[\e[1;32m\]" "\n\[\e[0m\]\$ ";'$PROMPT_COMMAND
+#export PROMPT_COMMAND='__git_ps1 "\n\[\e[0m\][\[\e[0;32m\]\u@\H\[\e[0m]\]\[\e[1;32m\]" "\n\[\e[0m\]\$ ";'$PROMPT_COMMAND
+export PROMPT_COMMAND='__git_ps1 "\n\[$(tput setaf 7)\][\[$(tput setaf 2)\]\u\[$(tput setaf 4)\]@\[$(tput setaf 2)\]\h \[$(tput setaf 6)\]\w\[$(tput setaf 7)\]]\[$(tput sgr0)\]" "\n\[\e[0m\]\$ ";'$PROMPT_COMMAND
 
 # paths
 if [ -d "$HOME/bin" ] ; then
@@ -73,7 +74,7 @@ fi
 if [[ -f "/usr/local/share/chruby/chruby.sh" ]]; then
     . /usr/local/share/chruby/chruby.sh
     . /usr/local/share/chruby/auto.sh
-    chruby ruby-2.4.1
+    chruby ruby-2.5.1
 fi
 
 # node
@@ -99,3 +100,6 @@ fi
 # bash aliases
 [[ -f ~/.bash/.bash_functions ]] && . ~/.bash/.bash_functions
 [[ -f ~/.bash/.bash_aliases ]] && . ~/.bash/.bash_aliases
+
+# WSL starts in user profile dir, not home dir
+cd
