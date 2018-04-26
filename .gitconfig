@@ -9,9 +9,8 @@
 	assumed = "!git ls-files -v | grep ^h | cut -c 3-"
 	unassume-all = "!git assumed | xargs git update-index --no-assume-unchanged"
 	assume-all = "!git st -s | awk {'print $2'} | xargs git assume"
-[user]
-	name = Anthony Castle
-	email = acastle@casas.org
 [core]
 	autocrlf = true
 	fileMode = false
+[include]
+	path = .gitconfig.local
