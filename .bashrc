@@ -57,9 +57,8 @@ fi
 
 ### ac
 
-. ~/.bash/git-prompt.sh
-#export PROMPT_COMMAND='__git_ps1 "\n\[\e[0m\][\[\e[0;32m\]\u@\H\[\e[0m]\]\[\e[1;32m\]" "\n\[\e[0m\]\$ ";'$PROMPT_COMMAND
-export PROMPT_COMMAND='__git_ps1 "\n\[$(tput setaf 7)\][\[$(tput setaf 2)\]\u\[$(tput setaf 4)\]@\[$(tput setaf 2)\]\h \[$(tput setaf 6)\]\w\[$(tput setaf 7)\]]\[$(tput sgr0)\]" "\n\[\e[0m\]\$ ";'$PROMPT_COMMAND
+. ~/.bash/bash-posh-git.sh
+export PROMPT_COMMAND='__posh_git_ps1 "\n\[$(tput setaf 7)\][\[$(tput setaf 2)\]\u\[$(tput setaf 4)\]@\[$(tput setaf 2)\]\h \[$(tput setaf 6)\]\w\[$(tput setaf 7)\]]\[$(tput sgr0)\] " "\n\[\e[0m\]\$ ";'
 
 # paths
 if [ -d "$HOME/bin" ] ; then
