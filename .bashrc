@@ -100,5 +100,8 @@ fi
 [[ -f ~/.bash/.bash_functions ]] && . ~/.bash/.bash_functions
 [[ -f ~/.bash/.bash_aliases ]] && . ~/.bash/.bash_aliases
 
+# keychain
+eval `keychain --eval ~/.ssh/id_rsa`
+
 # WSL starts in user profile dir, not home dir
 cd
