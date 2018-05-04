@@ -57,7 +57,7 @@ fi
 
 ### ac
 
-. ~/.bash/bash-posh-git.sh
+. "$HOME/.bash/bash-posh-git.sh"
 export PROMPT_COMMAND='__posh_git_ps1 "\n\[$(tput setaf 7)\][\[$(tput setaf 2)\]\u\[$(tput setaf 4)\]@\[$(tput setaf 2)\]\h \[$(tput setaf 6)\]\w\[$(tput setaf 7)\]]\[$(tput sgr0)\] " "\n\[\e[0m\]\$ ";'
 
 # paths
@@ -77,8 +77,8 @@ if [[ -f "/usr/local/share/chruby/chruby.sh" ]]; then
 fi
 
 # node
-export NVM_DIR="/home/acastle/.nvm"
-if [[ -f "$NVM_DIR/nvm.sh" ]] ; then
+export NVM_DIR="$HOME/.nvm"
+if [[ -s "$NVM_DIR/nvm.sh" ]] ; then
     . "$NVM_DIR/nvm.sh"
     [ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"
     nvm use node > /dev/null
@@ -91,17 +91,17 @@ if [[ -d "$HOME/.cargo" ]]; then
 fi
 
 # git auto complete
-[[ -f ~/.bash/git-completion.sh ]] && . ~/.bash/git-completion.sh
+[[ -f "$HOME/.bash/git-completion.sh" ]] && . "$HOME/.bash/git-completion.sh"
 
 # go
-[[ -s "/home/acastle/.gvm/scripts/gvm" ]] && . "/home/acastle/.gvm/scripts/gvm"
+[[ -s "$HOME/.gvm/scripts/gvm" ]] && . "$HOME/.gvm/scripts/gvm"
 
 # bash aliases
-[[ -f ~/.bash/.bash_functions ]] && . ~/.bash/.bash_functions
-[[ -f ~/.bash/.bash_aliases ]] && . ~/.bash/.bash_aliases
+[[ -f "$HOME/.bash/.bash_functions" ]] && . "$HOME/.bash/.bash_functions"
+[[ -f "$HOME/.bash/.bash_aliases" ]] && . "$HOME/.bash/.bash_aliases"
 
 # keychain
-eval `keychain --eval ~/.ssh/id_rsa`
+eval `keychain --eval "$HOME/.ssh/id_rsa"`
 
 # WSL starts in user profile dir, not home dir
 cd
