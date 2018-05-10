@@ -57,7 +57,7 @@ fi
 
 ### ac
 
-. "$HOME/.bash/bash-posh-git.sh"
+. "$HOME/.bash/posh-git"
 export PROMPT_COMMAND='__posh_git_ps1 "\n\[$(tput setaf 7)\][\[$(tput setaf 2)\]\u\[$(tput setaf 4)\]@\[$(tput setaf 2)\]\h \[$(tput setaf 6)\]\w\[$(tput setaf 7)\]]\[$(tput sgr0)\] " "\n\[\e[0m\]\$ ";'
 
 # paths
@@ -91,17 +91,20 @@ if [[ -d "$HOME/.cargo" ]]; then
 fi
 
 # git auto complete
-[[ -f "$HOME/.bash/git-completion.sh" ]] && . "$HOME/.bash/git-completion.sh"
+[ -s "$HOME/.bash/git-completion" ] && "$HOME/.bash/git-completion"
 
 # go
-[[ -s "$HOME/.gvm/scripts/gvm" ]] && . "$HOME/.gvm/scripts/gvm"
+[ -s "$HOME/.gvm/scripts/gvm" ] && . "$HOME/.gvm/scripts/gvm"
 
 # bash aliases
-[[ -f "$HOME/.bash/.bash_functions" ]] && . "$HOME/.bash/.bash_functions"
-[[ -f "$HOME/.bash/.bash_aliases" ]] && . "$HOME/.bash/.bash_aliases"
+[ -s "$HOME/.bash/functions" ] && . "$HOME/.bash/functions"
+[ -s "$HOME/.bash/aliases" ] && . "$HOME/.bash/aliases"
 
 # keychain
-eval `keychain --eval "$HOME/.ssh/id_rsa"`
+[ -s "$HOME/.bash/ssh_agent" ] && source "$HOME/.bash/ssh_agent"
+
+# mount network share at work
+[ -s "$HOME/.bash/mount_network_share" ] && source "$HOME/.bash/mount_network_share"
 
 # WSL starts in user profile dir, not home dir
 cd

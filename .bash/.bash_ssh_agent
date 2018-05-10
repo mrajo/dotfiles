@@ -1,3 +1,0 @@
-sshkey=~/.ssh/anthony.c@stle.co
-
-eval `keychain --eval $sshkey`
