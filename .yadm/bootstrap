@@ -50,3 +50,12 @@ tar xzvf keychain-2.8.5.tar.gz
 cd keychain-2.8.5/
 make clean && make
 cp keychain ~/.local/bin/
+
+# decrypt yadm files and setup alt links
+yadm decrypt
+yadm alt
+
+# set yadm git committer
+yadm gitconfig user.name "mrajo"
+yadm gitconfig user.email "anthony.c@stle.co"
+
