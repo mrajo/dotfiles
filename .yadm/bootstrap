@@ -1,11 +1,11 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # basic installs
 sudo apt update && sudo apt upgrade -y
 sudo apt install build-essential -y
 
 # install git
-sudo add-apt-repository ppa:git-core/ppa
+sudo add-apt-repository -y ppa:git-core/ppa
 sudo apt update
 sudo apt install git -y
 
@@ -52,6 +52,7 @@ make clean && make
 cp keychain ~/.local/bin/
 
 # decrypt yadm files and setup alt links
+printf "\nDecrypting YADM files...\n"
 yadm decrypt
 yadm alt
 
