@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+sudo mkdir -p /mnt/s
+sudo mount -t drvfs '\\dss\SQL TL\SCM\git' /mnt/s
