@@ -69,20 +69,13 @@ if [ -d "$HOME/.local/bin" ]; then
     export PATH="$HOME/.local/bin:$PATH"
 fi
 
-# ruby
-if [[ -f "/usr/local/share/chruby/chruby.sh" ]]; then
-    . /usr/local/share/chruby/chruby.sh
-    . /usr/local/share/chruby/auto.sh
-    chruby ruby-2.5.1
-fi
-
-# node
-export NVM_DIR="$HOME/.nvm"
-if [[ -s "$NVM_DIR/nvm.sh" ]] ; then
-    . "$NVM_DIR/nvm.sh"
-    [ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"
-    nvm use node > /dev/null
-    export PATH="./node_modules/.bin:$PATH"
+# asdf
+export ASDF_DIR="$HOME/.asdf"
+if [[ -s "$ASDF_DIR/asdf.sh" ]] ; then
+  . "$ASDF_DIR/asdf.sh"
+  [ -s "$ASDF_DIR/completions/asdf.bash" ] && . "$ASDF_DIR/completions/asdf.bash"
+  asdf global nodejs 11.7.0
+  asdf global ruby 2.6.0
 fi
 
 # rust
