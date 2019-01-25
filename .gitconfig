@@ -10,7 +10,7 @@
 	unassume-all = "!git assumed | xargs git update-index --no-assume-unchanged"
 	assume-all = "!git st -s | awk {'print $2'} | xargs git assume"
 [core]
-	autocrlf = true
+	autocrlf = false
 	fileMode = false
 [include]
 	path = .gitconfig.local
