@@ -58,7 +58,7 @@ fi
 ### ac
 
 . "$HOME/.bash/posh-git"
-export PROMPT_COMMAND='__posh_git_ps1 "\n\[$(tput setaf 7)\][\[$(tput setaf 2)\]\u\[$(tput setaf 4)\]@\[$(tput setaf 2)\]\h \[$(tput setaf 6)\]\w\[$(tput setaf 7)\]]\[$(tput sgr0)\] " "\n\[\e[0m\]\$ ";'
+export PROMPT_COMMAND='__posh_git_ps1 "\n[\[\e[32m\]\u\[\e[m\]\[\e[34m\]@\[\e[m\]\[\e[32m\]\h\[\e[m\]:\[\e[36m\]\w\[\e[m\]] " "\n\\$ ";'
 
 # paths
 if [ -d "$HOME/bin" ] ; then
@@ -76,6 +76,7 @@ if [[ -s "$ASDF_DIR/asdf.sh" ]] ; then
   [ -s "$ASDF_DIR/completions/asdf.bash" ] && . "$ASDF_DIR/completions/asdf.bash"
   asdf global nodejs 11.7.0
   asdf global ruby 2.6.0
+  export PATH="./node_modules/.bin:$PATH"
 fi
 
 # rust
@@ -98,6 +99,32 @@ fi
 
 # mount network share at work
 [ -s "$HOME/.bash/mount_network_share" ] && source "$HOME/.bash/mount_network_share"
+
+# start broot and let it change directory
+function br {
+    f=$(mktemp)
+
+    (
+  set +e
+  broot --out "$f" "$@"
+  code=$?
+  if [ "$code" != 0 ]; then
+      rm -f "$f"
+      exit "$code"
+  fi
+    )
+    code=$?
+    if [ "$code" != 0 ]; then
+  return "$code"
+    fi
+
+    d=$(cat "$f")
+    rm -f "$f"
+
+    if [ "$(wc -c <(echo -n "$d") | head -c1)" != 0 ]; then
+  cd "$d"
+    fi
+}
 
 # WSL starts in user profile dir, not home dir
 cd
