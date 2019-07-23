@@ -69,14 +69,16 @@ if [ -d "$HOME/.local/bin" ]; then
     export PATH="$HOME/.local/bin:$PATH"
 fi
 
-# asdf
-export ASDF_DIR="$HOME/.asdf"
-if [[ -s "$ASDF_DIR/asdf.sh" ]] ; then
-  . "$ASDF_DIR/asdf.sh"
-  [ -s "$ASDF_DIR/completions/asdf.bash" ] && . "$ASDF_DIR/completions/asdf.bash"
-  asdf global nodejs 11.7.0
-  asdf global ruby 2.6.0
-  export PATH="./node_modules/.bin:$PATH"
+# node
+if [[ -d "$HOME/.nodenv" ]]; then
+    export PATH="$HOME/.nodenv/bin:./node_modules/.bin:$PATH"
+    eval "$(nodenv init - --no-rehash)"
+fi
+
+#ruby 
+if [[ -d "$HOME/.rubies" ]]; then
+    source /usr/local/share/chruby/chruby.sh
+    source /usr/local/share/chruby/auto.sh
 fi
 
 # rust

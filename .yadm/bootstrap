@@ -23,20 +23,31 @@ rm keybase_amd64.deb
 mkdir -p ~/.local/bin
 mkdir ~/src
 
-# asdf
-git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.6.3
-. ~/.asdf/asdf.sh
+# install node with nodenv
+git clone https://github.com/nodenv/nodenv.git ~/.nodenv
+~/.nodenv/bin/nodenv init
+mkdir -p "$(nodenv root)"/plugins
+git clone https://github.com/nodenv/node-build.git "$(nodenv root)"/plugins/node-build
+git clone https://github.com/nodenv/node-build-update-defs.git "$(nodenv root)"/plugins/node-build-update-defs
+git clone https://github.com/nodenv/nodenv-package-rehash.git "$(nodenv root)"/plugins/nodenv-package-rehash
+nodenv install 12.7.0
 
-# node
-asdf plugin-add nodejs https://github.com/asdf-vm/asdf-nodejs.git
-. ~/.asdf/plugins/nodejs/bin/import-release-team-keyring
-asdf install nodejs 11.7.0
-asdf global nodejs 11.7.0
+# rubya
+cd ~/.src
+## chruby
+wget -O chruby-0.3.9.tar.gz https://github.com/postmodern/chruby/archive/v0.3.9.tar.gz
+tar -xzvf chruby-0.3.9.tar.gz
+cd chruby-0.3.9/
+sudo make install
+cd ..
 
-# ruby
-asdf plugin-add ruby https://github.com/asdf-vm/asdf-ruby.git
-asdf install ruby 2.6.0
-asdf global ruby 2.6.0
+## ruby-install
+wget -O ruby-install-0.7.0.tar.gz https://github.com/postmodern/ruby-install/archive/v0.7.0.tar.gz
+tar -xzvf ruby-install-0.7.0.tar.gz
+cd ruby-install-0.7.0/
+sudo make install
+
+ruby-install ruby 2.5.1
 
 # keychain
 cd ~/src
